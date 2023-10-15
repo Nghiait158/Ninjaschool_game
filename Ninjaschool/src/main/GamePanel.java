@@ -17,6 +17,8 @@ public class GamePanel extends JPanel {
     private Mouseinput mouseinput;
     private float xDelta=100, yDelta=100;
     private BufferedImage img;
+    private BufferedImage[][] animation;
+    private int aniTick, aniIndex, aniSpeed= 15;
 
 
     public GamePanel(){
@@ -24,10 +26,20 @@ public class GamePanel extends JPanel {
         mouseinput= new Mouseinput(this);
 
         importImg();
+        loadAnimation();
         setPanelSize();
         addKeyListener(new Keyboardinput(this));
         addMouseListener(mouseinput);
         addMouseMotionListener(mouseinput);
+    }
+
+    private void loadAnimation() {
+        animation = new BufferedImage[10][10];
+
+        for ( int j=0; j<animation.length; j++)
+            for( int i=0; i<animation.length; i++){
+                animation[j][i]= img.getSubimage(i*23,j*36 , 23, 36);
+            }
     }
 
     private void importImg() {
@@ -70,8 +82,26 @@ public class GamePanel extends JPanel {
     
     public void paintComponent (Graphics g){
         super.paintComponent(g);
-        g.drawImage(img, 0, 0, null);
+
+
+       updateAnimation();
         
+        g.drawImage(animation[3][0],(int) xDelta, (int) yDelta, 46, 72, null);
+
+
+    }
+
+    private void updateAnimation() {
+        // aniTick++;
+        // if( aniTick >= aniSpeed){
+        //     aniTick=0;
+        //     aniIndex++;
+        //     if(aniIndex>=animation.length){
+        //         aniIndex=0;
+        //     }
+        // }
+
+
     }
 
 } 
