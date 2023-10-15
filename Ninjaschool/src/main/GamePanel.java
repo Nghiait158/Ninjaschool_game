@@ -2,6 +2,7 @@ package main;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -30,10 +31,11 @@ public class GamePanel extends JPanel {
     }
 
     private void importImg() {
-        InputStream is= getClass().getResourceAsStream("/adventurer_Sprite_Sheet.png");
-
+        // InputStream is= getClass().getResourceAsStream("Ninjaschool/res/adventurer_Sprite_Sheet.png");
+        // InputStream is= getClass().
         try {
-            img= ImageIO.read(is);
+            // img= ImageIO.read(is);
+            img= ImageIO.read(new FileInputStream("Ninjaschool/res/adventurer_Sprite_Sheet.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,7 +70,7 @@ public class GamePanel extends JPanel {
     
     public void paintComponent (Graphics g){
         super.paintComponent(g);
-        // g.drawImage(img, 0, 0, null);
+        g.drawImage(img, 0, 0, null);
         
     }
 
