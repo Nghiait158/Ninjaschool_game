@@ -38,7 +38,7 @@ public class GamePanel extends JPanel {
 
         for ( int j=0; j<animation.length; j++)
             for( int i=0; i<animation.length; i++){
-                animation[j][i]= img.getSubimage(i*23,j*36 , 23, 36);
+                animation[j][i]= img.getSubimage(i*64,j*64 , 64, 64);
             }
     }
 
@@ -86,7 +86,7 @@ public class GamePanel extends JPanel {
 
        updateAnimation();
         
-        g.drawImage(animation[3][0],(int) xDelta, (int) yDelta, 46, 72, null);
+        g.drawImage(animation[3][0],(int) xDelta, (int) yDelta, 64*2, 64*2, null);
 
 
     }
