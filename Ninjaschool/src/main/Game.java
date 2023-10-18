@@ -5,6 +5,7 @@ public class Game implements Runnable {
     private GamePanel gamePanel;
     private Thread gameThread;
     private final int FPS_SET = 120;
+    private final int UPS_SET = 200;
     public Game(){ 
         gamePanel = new GamePanel();
         gameWindow= new GameWindow(gamePanel);
@@ -17,28 +18,47 @@ public class Game implements Runnable {
         gameThread = new Thread(this);
         gameThread.start();
     }
-
+    public void update(){
+        gamePanel.updateGame();;
+    }
     @Override
     public void run() {
 
         double timePerFrame =1000000000.0 /FPS_SET;
-        
-        long lastFrame= System.nanoTime();
-        long now = System.nanoTime();
-        int frames=0;
+        double timePerUpdate = 1000000000.0 /UPS_SET;
+
+        long previousTime=System.nanoTime();
+
+        int frames= 0;
+        int update= 0;
         long lastCheck=System.currentTimeMillis();
+
+        double deltaU =0 ;
+        double delatF=0;
         while (true) {
-            now= System.nanoTime();
-            if( System.nanoTime() - lastFrame >= timePerFrame){
-                gamePanel.repaint();
-                lastFrame= System.nanoTime();
-                frames++;
+            long currentTime= System.nanoTime();
+
+            deltaU +=(currentTime - previousTime) / timePerUpdate;
+            delatF +=(currentTime - previousTime) / timePerFrame;
+
+            previousTime = currentTime;
+            if (deltaU >=1){
+                update();
+                update++;
+                deltaU--;
             }
+            if (delatF>=1){
+                gamePanel.repaint();
+                frames++;
+                delatF--;
+            }
+
             
             if(System.currentTimeMillis() -lastCheck >=1000){
                 lastCheck= System.currentTimeMillis();
-                System.out.println("Fps: "+ frames);
+                System.out.println("Fps: "+ frames+ " | UPS: "+update);
                 frames=0;
+                update=0;
             }
         }
     }
