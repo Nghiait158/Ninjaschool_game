@@ -18,7 +18,7 @@ public class Mouseinput implements MouseListener, MouseMotionListener {
         // TODO Auto-generated method stub
         System.out.println("clickck");
         if(e.getButton()== MouseEvent.BUTTON1){
-            gamePanel.getGame().getPlayer().setAttack(true);
+            gamePanel.getGame().getPlayer().setAttacking(true);
         }
     }
 

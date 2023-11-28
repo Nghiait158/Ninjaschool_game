@@ -5,32 +5,31 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Java",
             "type": "java",
-            "name": "main",
             "request": "launch",
-            "mainClass": "main.main",
-            "projectName": "Ninjaschool_game_f2333b26"
+            "stopOnEntry": true,
+            "jdkPath": "${env:JAVA_HOME}/bin",
+            "cwd": "${fileDirname}",
+            "startupClass": "${fileBasenameNoExtension}",
+            "classpath": [
+                ".",
+                "${fileDirname}"
+            ]
         },
         {
+            "name": "Java Console App",
             "type": "java",
-            "name": "main",
             "request": "launch",
-            "mainClass": "main.main",
-            "projectName": "Ninjaschool_game-1_ad2a0b6a"
-        },
-        {
-            "type": "java",
-            "name": "main",
-            "request": "launch",
-            "mainClass": "main.main",
-            "projectName": "Ninjaschool_game-1_f6f92429"
-        },
-        {
-            "type": "java",
-            "name": "main",
-            "request": "launch",
-            "mainClass": "main.main",
-            "projectName": "Ninjaschool_game_2548fbc5"
+            "stopOnEntry": true,
+            "jdkPath": "${env:JAVA_HOME}/bin",
+            "cwd": "${fileDirname}",
+            "startupClass": "${fileBasenameNoExtension}",
+            "classpath": [
+                ".",
+                "${fileDirname}"
+            ],
+            "externalConsole": true
         },
         {
             "type": "java",
@@ -43,7 +42,7 @@
             "name": "main",
             "request": "launch",
             "mainClass": "main.main",
-            "projectName": "Ninjaschool_game_11a0b9c"
+            "projectName": "Ninjaschool_5ed300f5"
         }
     ]
 }

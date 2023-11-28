@@ -4,36 +4,52 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.Buffer;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
+import utilz.LoadSave;
+
 import static utilz.Constants.PlayerConstants.*;
 import static utilz.Constants.Directions.*;
 
 public class Player extends Entity {
 
     private BufferedImage[][] animation;
-    private int aniTick, aniIndex, aniSpeed= 15;
-    private int PlayerAction = RUNNING;
+    private int aniTick, aniIndex, aniSpeed= 25;
+    private int PlayerAction = IDLE;
     private boolean moving = false, attacking= false;
     private boolean left, up, right, down;
     private float playerSpeed = 2.0f;
 
-    public Player(float x, float y) {
-        super(x, y);
-        loadAnimation();
+    public Player(float x, float y, int width, int height) {
+        super(x, y, width, height);
+        loadAnimations();
         //TODO Auto-generated constructor stub
     }
 
     public void update(){
         updatePos();
-        updateAnimation();
+        updateAnimationTick();
         setAnimation();
         
     }
     public void render(Graphics g){
-        g.drawImage(animation[PlayerAction][aniIndex],(int) x, (int) y, 64*2, 64*2, null);
+        g.drawImage(animation[PlayerAction][aniIndex],(int) x, (int) y, width, height, null);
+    }
+
+    private void updateAnimationTick() {
+        aniTick++;
+        if( aniTick >= aniSpeed){
+            aniTick=0;
+            aniIndex++;
+            if(aniIndex >= GetSpriteAmount(PlayerAction)){
+                aniIndex=0; 
+                attacking= false;
+            }
+        }
     }
 
     private void setAnimation() {
@@ -59,17 +75,7 @@ public class Player extends Entity {
         aniIndex=0;
     }
 
-    private void updateAnimation() {
-        aniTick++;
-        if( aniTick >= aniSpeed){
-            aniTick=0;
-            aniIndex++;
-            if(aniIndex >= GetSpriteAmount(PlayerAction)){
-                aniIndex=0; 
-                attacking= false;
-            }
-        }
-    }
+    
 
     private void updatePos() {
 
@@ -94,37 +100,22 @@ public class Player extends Entity {
             moving= true;
         }
     }
-    private void loadAnimation() {
-        try {
-            // img= ImageIO.read(is);
-            BufferedImage img= ImageIO.read(new FileInputStream("Ninjaschool/res/adventurer_Sprite_Sheet.png"));
+    private void loadAnimations() {
+        BufferedImage img= LoadSave.GetPlayerAtlas(LoadSave.PLAYER_ATLAS);
+			animation = new BufferedImage[12][12];
+			for (int j = 0; j < animation.length; j++)
+				for (int i = 0; i < animation[j].length; i++)
+					animation[j][i] = img.getSubimage(i * 64, j * 64, 64, 64);
 
-              animation = new BufferedImage[13][13];
-
-                    for ( int j=0; j<animation.length; j++)
-                        for( int i=0; i<animation.length; i++){
-                            animation[j][i]= img.getSubimage(i*64,j*64 , 64, 64);
-                        }
-                    
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } 
-        finally {
-            try {
-                 new FileInputStream("Ninjaschool/res/adventurer_Sprite_Sheet.png").close();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-    }
+		
+	}
     public void resetDirBooleans(){
         left= false;
         right= false;
         up=false;
         down=false;
     }
-    public void setAttack(boolean attacking){
+    public void setAttacking(boolean attacking){
         this.attacking= attacking;
     }
     public boolean isLeft() {
