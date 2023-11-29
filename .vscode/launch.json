@@ -9,6 +9,13 @@
             "name": "main",
             "request": "launch",
             "mainClass": "main.main",
+            "projectName": "Ninjaschool_game_948b54fc"
+        },
+        {
+            "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "main.main",
             "projectName": "Ninjaschool_game_f2333b26"
         },
         {

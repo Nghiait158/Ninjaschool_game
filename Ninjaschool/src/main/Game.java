@@ -15,13 +15,13 @@ public class Game implements Runnable {
 
     private Player player;
     private LevelManager levelManager;
-    public final static int TILES_DEFAULT_SIZE= 32;
+    public final static int TILES_DEFAULT_SIZE= 31;
     public final static float SCALE=2f;
     public final static int TILES_IN_WIDTH=26;
-    public final static int TILES_IN_HEIGHT=28;
+    public final static int TILES_IN_HEIGHT=14;
     public final static int TILES_SIZE =(int) (TILES_DEFAULT_SIZE *SCALE);
     public final static int GAME_HEIGHT = TILES_SIZE *TILES_IN_HEIGHT;
-    public final static int GAME_WIDTH = TILES_SIZE *TILES_IN_HEIGHT;
+    public final static int GAME_WIDTH = TILES_SIZE *TILES_IN_WIDTH;
 
     public Game(){
         initClasses();
@@ -34,8 +34,9 @@ public class Game implements Runnable {
     }
 
     private void initClasses() {
-        player = new Player(200, 200,(int) (64*SCALE), (int) (64*SCALE));
         levelManager= new LevelManager(this);
+        player = new Player(200, 200,(int) (64*SCALE), (int) (64*SCALE));
+        player.loadlvlData(levelManager.getCurrentLevel().GetLevelData());
     }
 
     private void startGameLoop(){
