@@ -13,9 +13,9 @@ public class Constants {
         public static final int RUNNING = 1;
         public static final int IDLE = 0;
         public static final int JUMP = 5;
-        public static final int FALLING = 8;
+        public static final int FALLING = 6;
         // public static final int GROUND = 4;
-        public static final int HIT = 7;
+        public static final int HIT = 8;
         public static final int ATTACK_1 = 3;
         public static final int ATTACK_JUMP_1 = 2;
         public static final int ATTACK_JUMP_2 = 4;
@@ -29,7 +29,7 @@ public class Constants {
                 case JUMP:
                     return 5;
                 case FALLING:
-                // case GROUND:
+                    return 1;
                 case HIT:
                     return 8;
                 case ATTACK_1:
