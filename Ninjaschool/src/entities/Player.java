@@ -37,12 +37,11 @@ public class Player extends Entity {
         updatePos();
         updateAnimationTick();
         setAnimation();
-
+ 
     }
 
     public void render(Graphics g) {
-        g.drawImage(animation[PlayerAction][aniIndex], (int) (hitbox.x - xDrawOffset), (int) (hitbox.y - yDrawOffset),
-                width, height, null);
+        g.drawImage(animation[PlayerAction][aniIndex], (int) (hitbox.x - xDrawOffset), (int) (hitbox.y - yDrawOffset), width, height, null);
         // drawHitBox(g);
     }
 
@@ -129,9 +128,9 @@ public class Player extends Entity {
     }
 
     private void jump() {
-        if(inAir){
+        if(inAir)
             return;
-        }
+        
             inAir= true;
             airSpeed = jumpSpeed;
     }
