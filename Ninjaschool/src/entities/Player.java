@@ -12,13 +12,13 @@ public class Player extends Entity {
 
     private BufferedImage[][] animation;
     private int aniTick, aniIndex, aniSpeed = 25;
-    private int PlayerAction = IDLE;
+    private int playerAction = IDLE;
     private boolean moving = false, attacking = false;
     private boolean left, up, right, down, jump;
     private float playerSpeed = 2.0f;
     private int[][] lvlData;
-    private float xDrawOffset = 10 * Game.SCALE;
-    private float yDrawOffset = 15 * Game.SCALE;
+    private float xDrawOffset = 21 * Game.SCALE;
+    private float yDrawOffset = 32 * Game.SCALE;
     // Jumping/ Garvity
     private float airSpeed=0f;
     private float gravity = 0.04f* Game.SCALE;
@@ -29,7 +29,7 @@ public class Player extends Entity {
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
         loadAnimations();
-        initHitbox(x, y, 37 * Game.SCALE, 45 * Game.SCALE);
+        initHitbox(x, y, 20 * Game.SCALE, 27 * Game.SCALE);
 
     }
 
@@ -41,7 +41,7 @@ public class Player extends Entity {
     }
 
     public void render(Graphics g) {
-        g.drawImage(animation[PlayerAction][aniIndex], (int) (hitbox.x - xDrawOffset), (int) (hitbox.y - yDrawOffset), width, height, null);
+        g.drawImage(animation[playerAction][aniIndex], (int) (hitbox.x - xDrawOffset), (int) (hitbox.y - yDrawOffset), width, height, null);
         // drawHitBox(g);
     }
 
@@ -50,7 +50,7 @@ public class Player extends Entity {
         if (aniTick >= aniSpeed) {
             aniTick = 0;
             aniIndex++;
-            if (aniIndex >= GetSpriteAmount(PlayerAction)) {
+            if (aniIndex >= GetSpriteAmount(playerAction)) {
                 aniIndex = 0;
                 attacking = false;
             }
@@ -59,23 +59,23 @@ public class Player extends Entity {
 
     private void setAnimation() {
 
-        int startAni = PlayerAction;
+        int startAni = playerAction;
         if (moving) {
-            PlayerAction = RUNNING;
+            playerAction = RUNNING;
         } else
-            PlayerAction = IDLE;
+            playerAction = IDLE;
 
         if(inAir){
             if(airSpeed<0)
-                PlayerAction=JUMP;
+                playerAction=JUMP;
             else
-                PlayerAction =FALLING;
+                playerAction =FALLING;
         }
             
         if (attacking) 
-            PlayerAction = ATTACK_1;
+            playerAction = ATTACK_1;
 
-        if (startAni != PlayerAction)
+        if (startAni != playerAction)
             restAniTick();
     }
 
@@ -101,7 +101,7 @@ public class Player extends Entity {
             xSpeed += playerSpeed;
 
         if(!inAir){
-            if(!IsEntityOnFloor(hitbox,lvlData)){
+            if(!IsEntityOnFloor(hitbox, lvlData)){
                 inAir =true;
             }
         }

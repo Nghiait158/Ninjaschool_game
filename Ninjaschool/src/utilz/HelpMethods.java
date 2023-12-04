@@ -36,7 +36,7 @@ public class HelpMethods {
 			// Right
 			int tileXPos= currentTile * Game.TILES_SIZE;
 			int xOffset=(int)(Game.TILES_SIZE -hitbox.width);
-			return tileXPos +xOffset+57;
+			return tileXPos +xOffset-1;
 
 		}
 		else {
@@ -50,7 +50,7 @@ public class HelpMethods {
 		if(airSpeed>0){
 			int TileYPos =currentTile *Game.TILES_SIZE;
 			int yOffset = (int)(Game.TILES_SIZE - hitbox.height);
-			return TileYPos +yOffset+57;
+			return TileYPos +yOffset-1;
 		} else{
 			return currentTile *Game.TILES_SIZE;
 		}

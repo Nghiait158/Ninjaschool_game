@@ -25,12 +25,12 @@ public class Playing extends State implements Statemethods {
         player.loadlvlData(levelManager.getCurrentLevel().GetLevelData());
     }
 
-    public void windowFocusLost(){
-        player.resetDirBooleans();
-    }
-    public Player getPlayer(){
-        return player;
-    }
+    // public void windowFocusLost(){
+    //     player.resetDirBooleans();
+    // }
+    // public Player getPlayer(){
+    //     return player;
+    // }
 
 
 
@@ -94,6 +94,9 @@ public class Playing extends State implements Statemethods {
             case KeyEvent.VK_W:
                 player.setJUMP(true);
                 break;
+            case KeyEvent.VK_BACK_SPACE:
+                Gamestate.state = Gamestate.MENU;
+                break;
         }
     }
 
@@ -113,4 +116,8 @@ public class Playing extends State implements Statemethods {
                 break;
         }
     }
+
+
+
+    
 }
